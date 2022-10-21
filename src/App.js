@@ -1,26 +1,50 @@
-import './App.css';
-import Button from './components/Button/Button';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import data from './assests/data';
-import {useState} from 'react';
+import { useState } from "react";
+import Employee from "./components/Employee";
+import data from "./helper/data";
+import "./App.css"
 
-function App() {
-const [page, setPage] = useState(1);
-const userPerPage = 5;      // her sayfada 5 adet resim olsun
+const App = () => {
+  console.log(data)
+  const [listindex, setListindex] = useState(0);
 
-const indexOffLastUser = page * userPerPage;
-const indexOffFirstUser = indexOffLastUser - userPerPage;
+  const employee = data[listindex]
+  console.log(employee);
 
-const currentUsers = data.slice(indexOffFirstUser, indexOffLastUser);
+  const backClick = () => {
+    if (listindex > 0) {
+      setListindex(listindex-1)
+    }
+    
+  }
+  const nextClick = () => {
+    if (listindex < data.length-1) {
+      setListindex(listindex+1)
+    }
+    
+  }
+
+ console.log(listindex);
+
+
 
   return (
-    <div className="App">
-      <Header from={indexOffFirstUser + 1} to={indexOffFirstUser + currentUsers.length}/>
-      {currentUsers.map((item) => <Main key={item.id}{...item}/>)}
-      <Button total={Math.ceil(data.length / userPerPage)} page={page} setPage={setPage}/>
+    <div className="text-center all">
+      <h1>Employee List</h1>
+      <h6>Employee {listindex +1} </h6>
+
+      <Employee key={listindex} {...employee} />
+
+
+      <div className="last d-flex justify-content-center">
+        <button onClick={backClick} type="button" className="btn btn-danger btn-lg m-1 p-3">
+          Back
+        </button>
+        <button onClick={nextClick} type="button" className="btn btn-success btn-lg m-1 p-3">
+          Next
+        </button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,21 @@
+.myCard {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.card {
+  padding: 10px;
+  width: 20%;
+}
+
+.card img:hover {
+  transform: scale();
+  width: 100%;
+}
+
+
+.list-group-item {
+  background-color: cornflowerblue;
+}
